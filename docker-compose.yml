@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+    registry:
+        container_name: registry
+        image: registry:2.7.1
+        ports:
+            - 443:443
+        networks:
+            - webnet
+        environment:
+            REGISTRY_HTTP_ADDR: 0.0.0.0:443
+            REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+            REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+            REGISTRY_AUTH: htpasswd
+            REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+            REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+            REGISTRY_STORAGE_DELETE_ENABLED: "true"
+        volumes:
+            - ./data/registry:/var/lib/registry
+            - ./data/auth:/auth
+            - ./data/certs:/certs
+        restart: always
+networks:
+    webnet:
+        name: webnet
+        driver: bridge
