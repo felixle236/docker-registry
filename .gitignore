@@ -1,3 +1,3 @@
-data/auth/htpasswd
-data/registry
+config/auth/htpasswd
+config/registry
 .DS_Store
