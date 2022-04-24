@@ -9,6 +9,15 @@ Docker Registry
 - Start docker container: `docker-compose up` or `docker-compose up -d`.
 - Deploy a [registry server](https://docs.docker.com/registry/deploying/).
 - Config [insecure registry](https://docs.docker.com/registry/insecure/).
-- Clear disk space by [garbage collection](https://docs.docker.com/registry/garbage-collection/). Ex: `docker exec registry bin/registry garbage-collect /etc/docker/registry/config.yml -m`.
 - Registry API example `curl -u '<docker_user>:<docker_password>' -v -X GET https://<registry_address>/v2/<repos_name>/tags/list`. Refer to [Registry API](https://docs.docker.com/registry/spec/api/#detail).
 - Refer to docker compose document in [here](https://docs.docker.com/compose/overview/#compose-documentation).
+
+## Garbage Collection
+
+- Clear disk space by [garbage collection](https://docs.docker.com/registry/garbage-collection/). Ex: `docker exec registry bin/registry garbage-collect /etc/docker/registry/config.yml -m`.
+- Clear disk space automatically by command: `crontab -e`, add more content as (every hour):
+```
+0 * * * * docker image prune -f
+0 * * * * docker volume prune -f
+0 * * * * docker exec registry bin/registry garbage-collect /etc/docker/registry/config.yml -m
+```
