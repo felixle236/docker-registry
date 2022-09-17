@@ -4,7 +4,7 @@ Docker Registry
 ## Quick Start
 
 - Create `./config/auth` directory.
-- Create the basic authentication: `docker run --entrypoint htpasswd registry:2.8.1 -Bbn testuser testpassword > ./config/auth/htpasswd`.
+- Create the basic authentication: `docker run --entrypoint htpasswd httpd:2 -Bbn testuser testpassword > ./config/auth/htpasswd`.
 - Create the certificate: `openssl req -newkey rsa:4096 -nodes -sha256 -keyout ./config/certs/domain.key -x509 -days 365 -out ./config/certs/domain.crt`.
 - Start docker container: `docker compose up` or `docker compose up -d`.
 - Deploy a [registry server](https://docs.docker.com/registry/deploying/).
