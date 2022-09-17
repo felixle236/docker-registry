@@ -18,6 +18,7 @@ services:
         volumes:
             - ./config/auth:/auth
             - ./config/certs:/certs
+            - ./config/config.yml:/etc/docker/registry/config.yml
             - registry_data:/var/lib/registry
         restart: always
 
