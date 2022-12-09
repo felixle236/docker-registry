@@ -4,7 +4,7 @@ services:
         container_name: registry
         image: registry:2.8.1
         ports:
-            - 443:443
+            - 127.0.0.1:443:443
         networks:
             - webnet
         environment:
